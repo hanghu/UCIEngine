@@ -56,6 +56,8 @@ def de_addressing_array(Z):
     """
     assert len(Z.shape) == 2
     
+    if(Z.shape[0] == 1): return Z
+    
     Zd = np.zeros(Z.shape, dtype=np.int)
     Zd[-1] = Z[-1]
     for i in range(-1,-Z.shape[0]-1,-1):
@@ -68,7 +70,8 @@ def de_addressing_single_graph(addr, Z, Zd=None):
         deaddressing address within single CAS-like graph
         (with all possible combinations of electron occupying orbitals)
     """
-    assert isinstance(addr,int) and addr > 0 
+    assert isinstance(addr,int) or isinstance(addr,np.int64)
+    assert addr > 0 
     if Zd is None:
         Zd = de_addressing_array(Z)
     else:
