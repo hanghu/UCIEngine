@@ -56,11 +56,11 @@ def de_addressing_array(Z):
     """
     assert len(Z.shape) == 2
     
-    if(Z.shape[0] == 1): return Z
+    if(Z.shape[0] == 1): return Z.copy()
     
     Zd = np.zeros(Z.shape, dtype=np.int)
     Zd[-1] = Z[-1]
-    for i in range(-1,-Z.shape[0]-1,-1):
+    for i in range(-2,-Z.shape[0]-1,-1):
         Zd[i] = np.roll(Zd[i+1],-1)+Z[i]
 
     return Zd     
